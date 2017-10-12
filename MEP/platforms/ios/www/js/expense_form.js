@@ -3,7 +3,7 @@ console.log('expense form')
 function init() {
     
     function findGetParameter(parameterName) {
-        var result = null,
+        var result = '',
         tmp = [];
         location.search
         .substr(1)
@@ -15,6 +15,9 @@ function init() {
         return result;
     }
     
+    pic_urls = findGetParameter('pic_url');
+    all_transactions = findGetParameter('transaction');
+    
     function extractAllImage(urls){
         return urls.split(";");
     }
@@ -24,11 +27,23 @@ function init() {
         window.location = 'main.html';
     }
     
-    function Submit(){
-        navigator.notification.confirm("Confirm submission.", Cancel, "Submit");
+    function guidGenerator() {
+        var S4 = function() {
+            return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+        };
+        return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
     }
     
-    pic_urls = findGetParameter('pic_url');
+    function Proceed(){
+        result = guidGenerator();
+        window.location = 'main.html?transaction=' + all_transactions + ';' + result;
+    }
+    
+    function Submit(){
+        navigator.notification.confirm("Confirm submission.", Proceed, "Submit");
+    }
+    
+    
     image_list = extractAllImage(pic_urls);
     image_list.forEach(function (item){
                        var image = document.createElement("img");
