@@ -14,10 +14,52 @@ function init() {
                  });
         return result;
     }
-    pic_url = findGetParameter('pic_url')
-    print(pic_url)
-    var image = document.getElementById('myImage');
-    image.src = pic_url;
+    
+    function extractAllImage(urls){
+        return urls.split(";");
+    }
+    
+    function Cancel(){
+        console.log('here');
+        window.location = 'main.html';
+    }
+    
+    function Submit(){
+        navigator.notification.confirm("Confirm submission.", Cancel, "Submit");
+    }
+    
+    pic_urls = findGetParameter('pic_url');
+    image_list = extractAllImage(pic_urls);
+    image_list.forEach(function (item){
+                       var image = document.createElement("img");
+                       image.src = item;
+                       document.querySelector('#myImage').appendChild(image)
+                       });
+
+    // Setup back and submit button
+    document.querySelector('#cancel').addEventListener('touchend', Cancel);
+    document.querySelector('#submit').addEventListener('touchend', Submit);
+    //Use from Library
+    
+    function onSuccess(imageData) {
+        console.log(imageData);
+        var new_url = pic_urls + ';' + imageData;
+        console.log(new_url);
+        window.location = 'expensionForm.html?pic_url=' + new_url;
+    }
+    
+    function onFail(message) {
+        alert('Failed because: ' + message);
+    }
+    
+    document.querySelector("#choosepic").addEventListener("touchend", function() {
+                                                          console.log('click');
+                                                          navigator.camera.getPicture(onSuccess, onFail, {
+                                                                                      quality: 50,
+                                                                                      sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                                                                                      destinationType: Camera.DestinationType.FILE_URI});
+                                                          });
+    
 }
 
 
