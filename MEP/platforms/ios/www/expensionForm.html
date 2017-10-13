@@ -12,7 +12,7 @@
                                 width: 90%;
                             }
                         body {
-                            margin-top: 50px;
+                            margin-top: 40px;
                         }
                         img {
                             max-width: 100%;
@@ -21,16 +21,32 @@
                         </style>
                         </head>
     <body>
-        <div id="myImage">
+        <div id="myImage"></div>
+        <div class="divTable greyGridTable">
+            <div class="divTableHeading">
+                <div class="divTableRow">
+                    <div class="divTableHead">Item</div>
+                    <div class="divTableHead">Date</div>
+                    <div class="divTableHead">Price</div>
+                </div>
+            </div>
+            
+            <div id="main_body" class="divTableBody">
+            </div>
+            
+            <div class="divTableFoot tableFootStyle">
+                <div class="divTableRow">
+                    <div class="divTableCell"></div>
+                    <div class="divTableCell"></div>
+                    <div id="total_amount" class="divTableCell"></div>
+                </div>
+            </div>
         </div>
-        <div>Put information about receipt here.</div>
-        
-        
-        <button id="">Take other receipt</button>
-        <button id="choosepic">Choose other receipt</button>
-        
-        <div id="cancel">Cancel</div>
-        <div id="submit">Submit</div>
+        <div class="center_container">
+            <div id="choosepic" class="btn">Add More</div>
+            <div id="submit" class="btn">Submit</div>
+            <div id="cancel" class="btn" style="background: #d93434;">Cancel</div>
+        </div>
             
         <script src="cordova.js"></script>
         <script src="js/expense_form.js"></script>

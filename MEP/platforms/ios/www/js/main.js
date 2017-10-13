@@ -38,9 +38,10 @@ function init() {
         txn_list = getAllTxns(submitted_transaction)
         txn_list.forEach(function(item){
             if(item != ''){
-                txn = document.createElement('div');
-                txn.innerHTML = item + ' has been submitted.';
-                document.querySelector("#recent").appendChild(txn)
+                         txn = document.createElement('div');
+                         txn.innerHTML = item + ' has been submitted.';
+                         txn.className = "btn3";
+                         document.querySelector("#recent").appendChild(txn)
              }
         });
     }
